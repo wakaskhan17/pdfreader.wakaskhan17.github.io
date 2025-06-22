@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Chat Analyzer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-pdf"></i> PDF Chat Analyzer</h1>
+            <p>Upload a PDF and ask questions about it</p>
+            <button id="apiKeyBtn"><i class="fas fa-key"></i> API Key</button>
+        </header>
+
+        <div class="main-content">
+            <!-- Left side - PDF upload and viewer -->
+            <div class="document-section">
+                <div class="upload-area" id="dropzone">
+                    <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                    <p>Drag & drop PDF here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".pdf">
+                </div>
+                <div class="pdf-controls">
+                    <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span id="pageInfo">Page: 0/0</span>
+                    <button id="nextPage" disabled><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="pdf-viewer">
+                    <canvas id="pdfCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Right side - Chat interface -->
+            <div class="chat-section">
+                <div class="chat-header">
+                    <h3><i class="fas fa-comments"></i> PDF Chat</h3>
+                    <button id="summarizeBtn" disabled><i class="fas fa-scroll"></i> Summarize</button>
+                </div>
+                <div class="chat-container" id="chatContainer">
+                    <div class="welcome-message">
+                        <p>Upload a PDF to start asking questions. Try:</p>
+                        <ul>
+                            <li>"What is this about?"</li>
+                            <li>"Summarize the key points"</li>
+                            <li>"Find information about [topic]"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Ask about the PDF..." disabled>
+                    <button id="sendBtn" disabled><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Note: Requires OpenAI API key - stored only in your browser</p>
+        </footer>
+    </div>
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-key"></i> Enter OpenAI API Key</h3>
+            <p>Get your key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI</a></p>
+            <input type="password" id="apiKeyInput" placeholder="sk-...">
+            <div class="modal-buttons">
+                <button id="saveApiKeyBtn" class="btn-primary">Save</button>
+                <button id="cancelBtn" class="btn-secondary">Cancel</button>
+            </div>
+            <p class="small">Key is stored locally in your browser only</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
